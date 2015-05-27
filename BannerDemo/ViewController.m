@@ -7,8 +7,10 @@
 //
 
 #import "ViewController.h"
-
+#import "BannerObject.h"
+#import "BannerView.h"
 @interface ViewController ()
+@property (weak, nonatomic) IBOutlet UIView *contentView;
 
 @end
 
@@ -16,7 +18,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    NSMutableArray *bannerArr = [NSMutableArray array];
+    for (int i = 0; i < 3; i++) {
+        BannerObject *object = [[BannerObject alloc]init];
+        object.imgUrl = [NSString stringWithFormat:@"%d",i+1];
+        [bannerArr addObject:object];
+    }
+    BannerView *banner = [[BannerView alloc]init];
+    banner.ifNoCycle = YES;
+    [banner setBannerViewWithArr:bannerArr];
+    [self.contentView addSubview:banner];
 }
 
 - (void)didReceiveMemoryWarning {
